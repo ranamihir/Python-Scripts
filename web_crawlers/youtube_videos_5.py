@@ -37,8 +37,7 @@ def check_by_search_and_return_video(type):
     try:
         link = soup.find('a', {'class': 'yt-uix-sessionlink yt-uix-tile-link yt-ui-ellipsis yt-ui-ellipsis-2 spf-link '})
         try:
-            href = link['href']
-            video = pafy.new('https://www.youtube.com' + href)
+            video = pafy.new('https://www.youtube.com' + link['href'])
             return video
         except TypeError:
             print('No results found.')
