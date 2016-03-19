@@ -33,3 +33,5 @@ for show in tv_shows:
 target.close()
 if os.stat("C:/Users/ranamihir/Desktop/TV Shows.txt").st_size:
     webbrowser.open("TV Shows.txt")
+else:
+    os.remove("TV Shows.txt")
