@@ -20,7 +20,7 @@ tv_shows = {
     "The Flash": 'http://awesomedl.ru/?s=the+flash&x=0&y=0'
 }
 
-target = open("TV Shows.txt", 'w')
+target = open("C:/Users/ranamihir/Desktop/TV Shows.txt", 'w')
 
 for show in tv_shows:
     url = tv_shows[show]
