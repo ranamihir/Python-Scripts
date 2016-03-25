@@ -1,10 +1,9 @@
-#This is a script checks for new episodes of TV Shows
+# This is a script checks for new episodes of TV Shows and opens their download page in browser
 import requests
-import time
 import webbrowser
+import os
 from bs4 import BeautifulSoup
 from datetime import datetime
-import os
 
 tv_shows = {
     "Arrow": 'http://awesomedl.ru/tag/arrow/',
@@ -30,7 +29,16 @@ for show in tv_shows:
     for dates in soup.findAll('span', {'class': 'meta_date'}):
         if datetime.strptime(dates.text, '%B %d, %Y').date() == datetime.today().date():
             target.write(show + " is here!\n")
+            episode_url = dates.find_previous("a")['href']
+            episode_source_code = requests.get(episode_url)
+            episode_plain_text = episode_source_code.text
+            episode_soup = BeautifulSoup(episode_plain_text)
+            download_url = episode_soup.find("a", text="Mega")['href']
+            webbrowser.open(download_url[download_url.index("https")::])
+
+
 target.close()
+
 if os.stat("C:/Users/ranamihir/Desktop/TV Shows.txt").st_size:
     webbrowser.open("TV Shows.txt")
 else:
