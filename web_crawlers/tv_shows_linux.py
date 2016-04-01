@@ -1,13 +1,14 @@
-# This is a script checks for new episodes of TV Shows and opens their download page in browser
+# This is a script checks for new TV Show episodes, and starts downloading them automatically
 import requests
 import webbrowser
 import os
 from bs4 import BeautifulSoup
 from datetime import datetime
+from selenium import webdriver
+import time
 
 tv_shows = {
     "Arrow": 'http://awesomedl.ru/tag/arrow/',
-    "Better Caul Saul": 'http://awesomedl.ru/?s=better+call+saul&x=0&y=0',
     "Castle": 'http://awesomedl.ru/tag/castle/',
     "Elementary": 'http://awesomedl.ru/tag/elementary/',
     "House of Cards": 'http://awesomedl.ru/?s=house+of+cards&x=0&y=0',
@@ -32,4 +33,8 @@ for show in tv_shows:
             episode_plain_text = episode_source_code.text
             episode_soup = BeautifulSoup(episode_plain_text, "lxml")
             download_url = episode_soup.find("a", text="Mega")['href']
-            webbrowser.open(download_url[download_url.index("https")::])
+            # browser = webdriver.Chrome("C:/Python34/chromedriver.exe")
+            browser.get(download_url[download_url.index("https")::])
+            time.sleep(15)
+            download_button = browser.find_element_by_class_name('throught-browser')
+            download_button.click()
