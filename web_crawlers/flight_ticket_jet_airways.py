@@ -56,7 +56,10 @@ while 1:
     price = int(price_element.text[3:].replace(',', ''))
     print(price)
     time.sleep(10)
-    browser.close()
+    try:
+        browser.close()
+    except:
+        continue
     if price <= threshold_value:
         # Send mail
         sender_address = 'abc@gmail.com'
