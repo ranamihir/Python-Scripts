@@ -59,7 +59,7 @@ while 1:
     try:
         browser.close()
     except:
-        continue
+        pass
     if price <= threshold_value:
         # Send mail
         sender_address = 'abc@gmail.com'
