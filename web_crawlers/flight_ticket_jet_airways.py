@@ -72,12 +72,19 @@ while 1:
         password = '<password>'
 
         # The actual mail send
-        server = smtplib.SMTP('smtp.gmail.com:587')
-        server.starttls()
-        server.login(username, password)
-        server.sendmail(sender_address, receiver_address1, message)
-        server.sendmail(sender_address, receiver_address2, message)
-        server.quit()
+        try:
+            server = smtplib.SMTP('smtp.gmail.com:587')
+            server.starttls()
+            server.login(username, password)
+            server.sendmail(sender_address, receiver_address1, message)
+            server.sendmail(sender_address, receiver_address2, message)
+            server.quit()
+            print("Message sent successfully.")
+        except Exception as e:
+            error = e.args[1].decode("utf-8")
+            error = error[(error.index(' ')+1):]
+            end = error.index('.')+1
+            print("Falied to send message: " + error[:end] + '(' + str(e.args[0]) + ')')
 
     # Keep checking after every one hour
     time.sleep(3600)
