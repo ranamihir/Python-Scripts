@@ -15,7 +15,7 @@ while 1:
     threshold_value = 8000
 
     # Navigate to appropriate flight web page
-    browser = webdriver.Chrome()
+    browser = webdriver.Chrome("C:/Python34/chromedriver.exe")
     browser.get("http://www.jetairways.com/EN/IN/Home.aspx")
     label = browser.find_element_by_id("oneWay_trigger")
     label.click()
