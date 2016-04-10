@@ -33,7 +33,7 @@ for show in tv_shows:
             episode_plain_text = episode_source_code.text
             episode_soup = BeautifulSoup(episode_plain_text, "lxml")
             download_url = episode_soup.find("a", text="Mega")['href']
-            # browser = webdriver.Chrome("C:/Python34/chromedriver.exe")
+            browser = webdriver.Chrome()
             browser.get(download_url[download_url.index("https")::])
             time.sleep(15)
             download_button = browser.find_element_by_class_name('throught-browser')
