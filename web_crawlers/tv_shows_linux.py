@@ -1,6 +1,5 @@
 # This is a script checks for new TV Show episodes, and starts downloading them automatically
 import requests
-import webbrowser
 import os
 from bs4 import BeautifulSoup
 from datetime import datetime
