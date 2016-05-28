@@ -1,3 +1,5 @@
+# This is a script that scrapes all the data from espncricinfo.com, based on user's input of class (Tests, ODI's, T20's,
+#  etc.) for all types (Batting, Bowling, Fielding, etc.), and dumps all the data into separate CSV files.
 import requests
 from bs4 import BeautifulSoup
 
@@ -26,6 +28,7 @@ def maximum_pages(url):
 def spider(class_type):
     types = ['batting', 'bowling', 'fielding', 'allround', 'fow', 'team', 'official', 'aggregate']
     for type in types:
+        print('For file ' + class_type + '_' + type + '.csv:')
         url = 'http://stats.espncricinfo.com/ci/engine/stats/index.html?template=results;type=' + type + ';class=' + str(classes[class_type])
         max_pages = 1
         max = maximum_pages(url)
@@ -34,6 +37,7 @@ def spider(class_type):
         page = 1
         f = open(class_type + '_' + type + '.csv', 'w+')
         while page <= max_pages:
+            print('\r\tDownloading page ' + str(page) + ' of ' + str(max_pages) + '...', end='')
             url += ';page=' + str(page)
             source_code = requests.get(url)
             plain_text = source_code.text
