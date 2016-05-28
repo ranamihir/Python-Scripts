@@ -1,3 +1,5 @@
+# This is a script that scrapes all the data from espncricinfo.com, based on user's input of class (Tests, ODI's, T20's,
+# etc.) and type (Batting, Bowling, Fielding, etc.), and dumps all the data into a CSV file.
 import requests
 from bs4 import BeautifulSoup
 
@@ -13,26 +15,16 @@ classes = {
     'youth odis': 21
 }
 
-def maximum_pages(url):
-        source_code = requests.get(url)
-        plain_text = source_code.text
-        soup = BeautifulSoup(plain_text, "html.parser")
-        for row in soup.findAll('tr', {'class': 'data2'}):
-            for cell in row.findAll('td'):
-                text = cell.text
-                if 'Page' in text:
-                    return int(text.split()[-1])
-
 def spider(class_type, type):
-    url = 'http://stats.espncricinfo.com/ci/engine/stats/index.html?template=results;type=' + type + ';class=' + str(classes[class_type])
-    max_pages = 1
-    max = maximum_pages(url)
-    if max:
-        max_pages = max
-    page = 1
     f = open(class_type + '_' + type + '.csv', 'w+')
-    while page <= max_pages:
-        url += ';page=' + str(page)
+    params = []
+    url = 'http://stats.espncricinfo.com/ci/engine/stats/index.html?template=results;type=' + type + ';class=' + str(classes[class_type]) + ";page=1"
+    while url:
+        params = url.split(';')
+        for item in params:
+            if 'page' in item:
+                print('\r' + item.capitalize(), end='')
+                break
         source_code = requests.get(url)
         plain_text = source_code.text
         soup = BeautifulSoup(plain_text, "html.parser")
@@ -44,7 +36,16 @@ def spider(class_type, type):
                     except:
                         pass
             f.write('\n')
-        page+=1
+        pagination_links = soup.find_all('a', {'class': 'PaginationLink'})
+        if pagination_links:
+            for link in pagination_links:
+                if link.text == 'Next \n':
+                    url = 'http://stats.espncricinfo.com/' + link['href']
+                    break
+                else:
+                    url = None
+        else:
+            break
     f.close()
 
 class_type = input('Enter class:\n').lower().replace('\'', '')
