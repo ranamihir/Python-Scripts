@@ -23,7 +23,7 @@ def spider(class_type, type):
         params = url.split(';')
         for item in params:
             if 'page' in item:
-                print(item.capitalize())
+                print('\r' + item.capitalize(), end='')
                 break
         source_code = requests.get(url)
         plain_text = source_code.text
