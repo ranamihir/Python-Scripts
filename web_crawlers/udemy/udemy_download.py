@@ -47,6 +47,7 @@ submit = browser.find_element_by_class_name('ButtonSm')
 submit.click()
 
 for course in courses:
+    total_files = 0
     while 1:
         # Initially store the names of all videos for each course
         indices = []
@@ -80,6 +81,12 @@ for course in courses:
         f = open(course_path + 'Download Urls.txt', 'a')
         url = courses[course]
         video_count = 0
+
+        # Delete 'Download Urls.txt' file if all videos haves been downloaded
+        if len(names) == total_files:
+            os.remove(f.name)
+            break
+
         for index in indices:
             try:
                 if not os.path.exists(course_path + names[video_count]):
@@ -154,10 +161,6 @@ for course in courses:
                     os.rmdir(section_path)
             except Exception as e:
                 print(str(e.args[0]))
-        # Delete 'Download Urls.txt' file if all videos haves been downloaded
-        if len(names) == total_files:
-            os.remove(f.name)
-            break
 
     # Safely quit browser
     browser.quit()
