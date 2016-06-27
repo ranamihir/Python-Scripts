@@ -11,7 +11,7 @@ def reporthook(blocknum, blocksize, totalsize):
     readsofar = (blocknum * blocksize)
     if totalsize > 0:
         percent = readsofar * 1e2 / totalsize
-        s = "\r%5.1f%% %*d mb / %d mb" % (
+        s = "\r%5.1f%% %*.2f mb / %.2f mb" % (
             percent, len(str(totalsize)), readsofar/(1024*1024), totalsize/(1024*1024))
         sys.stderr.write(s)
         if readsofar >= totalsize:
@@ -25,15 +25,15 @@ def replace(s):
 
 
 courses = {
-    "Shell-Scripting-Linux": 'https://citigroup.udemy.com/shell-scripting-linux/learn/v4/content',
-    "Learning-Python-for-Data-Analysis-and-Visualization": "https://citigroup.udemy.com/learning-python-for-data-analysis-and-visualization/learn/v4/content",
-    "Data Analysis in Python with Pandas": "https://citigroup.udemy.com/data-analysis-in-python-with-pandas/learn/v4/content",
-    "Data Science: Deep Learning in Python": "https://citigroup.udemy.com/data-science-deep-learning-in-python/learn/v4/content",
-    "Build Web Apps with React JS and Flux": "https://citigroup.udemy.com/learn-and-understand-reactjs/learn/v4/content",
+     "Shell-Scripting-Linux": 'https://citigroup.udemy.com/shell-scripting-linux/learn/v4/content',
+     "Learning-Python-for-Data-Analysis-and-Visualization": "https://citigroup.udemy.com/learning-python-for-data-analysis-and-visualization/learn/v4/content",
+     "Data Analysis in Python with Pandas": "https://citigroup.udemy.com/data-analysis-in-python-with-pandas/learn/v4/content",
+     "Data Science: Deep Learning in Python": "https://citigroup.udemy.com/data-science-deep-learning-in-python/learn/v4/content",
+     "Build Web Apps with React JS and Flux": "https://citigroup.udemy.com/learn-and-understand-reactjs/learn/v4/content",
     "Project Management Professional: Prep for PMP": "https://citigroup.udemy.com/pmp-exam-prep-everything-you-must-know-to-pass-the-pmp-exam/learn/v4/content",
-    "Master Project Risk Management - 5 PDUs": "https://citigroup.udemy.com/project-risk-management-5-pdus/learn/v4/content",
-    "Business Management - Organisational Culture Change Training": "https://citigroup.udemy.com/business-create-organisational-culture-change/learn/v4/content",
-    "Statistics for Management (MBA) - Foundation of Analytics": "https://citigroup.udemy.com/statistics-by-example/learn/v4/content",
+     "Master Project Risk Management - 5 PDUs": "https://citigroup.udemy.com/project-risk-management-5-pdus/learn/v4/content",
+     "Business Management - Organisational Culture Change Training": "https://citigroup.udemy.com/business-create-organisational-culture-change/learn/v4/content",
+     "Statistics for Management (MBA) - Foundation of Analytics": "https://citigroup.udemy.com/statistics-by-example/learn/v4/content",
 }
 
 browser = webdriver.Chrome('C:/Python34/chromedriver.exe')
@@ -73,19 +73,19 @@ for course in courses:
             index_count += 1
         print('Found ' + str(video_count-1) + ' videos.\n')
 
-        # Downloading all videos with proper names
-        course_path = 'Udemy/' + replace(course) + '/'
-        if not os.path.exists(course_path):
-            os.makedirs(course_path)
-        f = open(course_path + 'Download Urls.txt', 'a')
-        url = courses[course]
-        video_count = 0
-
         # Delete 'Download Urls.txt' file if all videos haves been downloaded
+        course_path = 'C:/Users/ranamihir/Documents/Softwares & Tutorials/Udemy/' + replace(course) + '/'
+        f = open(course_path + 'Download Urls.txt', 'a')
         if len(names) == total_files:
+            f.close()
             os.remove(f.name)
             break
 
+        # Downloading all videos with proper names
+        if not os.path.exists(course_path):
+            os.makedirs(course_path)
+        url = courses[course]
+        video_count = 0
         print('Downloading videos of the course \'' + course.replace('-', ' ') + '\'...')
         for index in indices:
             try:
