@@ -74,7 +74,6 @@ for course in courses:
         print('Found ' + str(video_count-1) + ' videos.\n')
 
         # Downloading all videos with proper names
-        print('Downloading videos of the course \'' + course.replace('-', ' ') + '\'...')
         course_path = 'Udemy/' + replace(course) + '/'
         if not os.path.exists(course_path):
             os.makedirs(course_path)
@@ -87,6 +86,7 @@ for course in courses:
             os.remove(f.name)
             break
 
+        print('Downloading videos of the course \'' + course.replace('-', ' ') + '\'...')
         for index in indices:
             try:
                 if not os.path.exists(course_path + names[video_count]):
