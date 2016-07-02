@@ -128,7 +128,7 @@ for course in courses:
                     f.write(names[video_count] + ':\t' + download_url + '\n')
                     print('File being downloaded:\t' + names[video_count])
                     try:
-                        response = request.urlretrieve(download_url, course_path + names[video_count], reporthook)
+                        request.urlretrieve(download_url, course_path + names[video_count], reporthook)
                     except error.ContentTooShortError:
                         print('\nDownload Failed. Internet disconnected in between.')
                         os.remove(course_path + names[video_count])
