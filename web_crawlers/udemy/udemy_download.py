@@ -21,7 +21,7 @@ def reporthook(blocknum, blocksize, totalsize):
 
 
 def replace(s):
-    return s.replace('\\', '').replace('/', ',').replace(':', ' -').replace('*', '').replace('?', '.').replace('\'', '\'').replace('<', '').replace('>', '').replace('|', '')
+    return s.replace('\\', '').replace('/', ',').replace(':', ' -').replace('*', '').replace('?', '').replace('\'', '\'').replace('<', '').replace('>', '').replace('|', '')
 
 
 courses = {
