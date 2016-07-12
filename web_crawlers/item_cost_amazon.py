@@ -1,21 +1,20 @@
 # Checks price of an item on Amazon.in
-
-from selenium import webdriver
+from bs4 import BeautifulSoup
+import requests
 import smtplib
 
-url = "http://goo.gl/0nxy4l"
-threshold_value = 4000
+url = 'http://www.amazon.in/WD-Elements-Portable-External-Drive/dp/B008GS8LT0/ref=sr_1_2?ie=UTF8&qid=1464859010&sr=8-2&keywords=wd+my+passport+1+tb+external+hard+disk'
+threshold_value = 3000
 
-driver = webdriver.Chrome("C:/Python34/chromedriver.exe")
-driver.get(url)
-name = driver.find_element_by_id('productTitle').text
+source_code = requests.get(url)
+plain_text = source_code.text
+soup = BeautifulSoup(plain_text, 'lxml')
+name = soup.find('span', {'id': 'productTitle'}).text.replace('\n', '').strip(' ')
 try:
-    price = driver.find_element_by_id('priceblock_ourprice').text.strip(' ').replace(',', '')
+    price = soup.find('span', {'id': 'priceblock_ourprice'}).text.strip(' ').replace(',', '').replace(u'\xa0', '').strip(' ')
 except:
-    price = driver.find_element_by_id('priceblock_saleprice').text.strip(' ').replace(',', '')
-
-print 'Price of ' + name + ' is: Rs.' + price
-driver.close()
+    price = soup.find('span', {'id': 'priceblock_saleprice'}).text.strip(' ').replace(',', '').replace(u'\xa0', '').strip(' ')
+print('Price of ' + name + ' is: Rs.' + price)
 
 if int(price[:price.index('.')]) <= threshold_value:
         # Send mail
@@ -34,9 +33,9 @@ if int(price[:price.index('.')]) <= threshold_value:
             server.login(username, password)
             server.sendmail(sender_address, receiver_address, message)
             server.quit()
-            print "Message sent successfully."
+            print('Message sent successfully.')
         except Exception as e:
             error = e.args[1]
             error = error[(error.index(' ')+1):]
             end = error.index('.')+1
-            print "Falied to send message: " + error[:end] + '(' + str(e.args[0]) + ')'
+            print('Falied to send message: ' + error[:end] + '(' + str(e.args[0]) + ')')
