@@ -55,6 +55,7 @@ courses = {
     # 'CFA Level I Foundation Course: Introduction to Quants': 'https://citigroup.udemy.com/cfa-foundation-quants/learn/v4/content',
     # 'CFA Level I Workshop 6: Alternatives, PM and Economics': 'https://citigroup.udemy.com/cfa-workshop-6/learn/v4/content',
     # 'Beginner to Pro in Excel: Financial Modeling and Valuation': 'https://citigroup.udemy.com/beginner-to-pro-in-excel-financial-modeling-and-valuation/learn/v4/content',
+    'The Complete Ruby on Rails Developer Course': 'https://citigroup.udemy.com/the-complete-ruby-on-rails-developer-course/learn/v4/content',
 }
 
 browser = webdriver.Chrome('C:/Python34/chromedriver.exe')
