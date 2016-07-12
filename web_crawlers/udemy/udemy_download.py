@@ -21,41 +21,41 @@ def reporthook(blocknum, blocksize, totalsize):
 
 
 def replace(s):
-    return s.replace('\\', '').replace('/', ',').replace(':', ' -').replace('*', '').replace('?', '').replace('\'', '\'').replace('<', '').replace('>', '').replace('|', '')
+    return s.replace('\\', '').replace('/', ',').replace(':', ' -').replace('*', '').replace('?', '.').replace('\'', '\'').replace('<', '').replace('>', '').replace('|', '').strip('.')
 
 
 courses = {
-    # 'Shell Scripting Linux': 'https://citigroup.udemy.com/shell-scripting-linux/learn/v4/content',
-    # 'Learning Python for Data Analysis and Visualization': 'https://citigroup.udemy.com/learning-python-for-data-analysis-and-visualization/learn/v4/content',
-    # 'Data Analysis in Python with Pandas': 'https://citigroup.udemy.com/data-analysis-in-python-with-pandas/learn/v4/content',
-    # 'Data Science: Deep Learning in Python': 'https://citigroup.udemy.com/data-science-deep-learning-in-python/learn/v4/content',
-    # 'Build Web Apps with React JS and Flux': 'https://citigroup.udemy.com/learn-and-understand-reactjs/learn/v4/content',
-    # 'Project Management Professional: Prep for PMP': 'https://citigroup.udemy.com/pmp-exam-prep-everything-you-must-know-to-pass-the-pmp-exam/learn/v4/content',
-    # 'Master Project Risk Management - 5 PDUs': 'https://citigroup.udemy.com/project-risk-management-5-pdus/learn/v4/content',
-    # 'Business Management - Organisational Culture Change Training': 'https://citigroup.udemy.com/business-create-organisational-culture-change/learn/v4/content',
-    # 'Statistics for Management (MBA) - Foundation of Analytics': 'https://citigroup.udemy.com/statistics-by-example/learn/v4/content',
-    # 'Learn and Understand AngularJS': 'https://citigroup.udemy.com/learn-angularjs/learn/v4/content',
-    # 'Meteor and React for Realtime Apps': 'https://citigroup.udemy.com/meteor-react-tutorial/learn/v4/content',
-    # 'AngularJS Crash Course for Beginners': 'https://citigroup.udemy.com/angularjs-crash-course-for-beginners/learn/v4/content',
-    # 'The Complete Guide to Angular 2': 'https://citigroup.udemy.com/the-complete-guide-to-angular-2/learn/v4/content',
-    # 'Learn Grunt with Examples: Automate Your Front End Workflow': 'https://citigroup.udemy.com/learn-grunt-automate-your-front-end-workflow/learn/v4/content',
-    # 'Introduction to Unit Testing': 'https://citigroup.udemy.com/refactoru-intro-unit-test/learn/v4/content',
-    # 'Advanced Node.js Development': 'https://citigroup.udemy.com/refactoru-adv-nodejs/learn/v4/content',
-    # 'Build Web Apps Using EmberJS: The Complete Course': 'https://citigroup.udemy.com/build-web-apps-using-emberjs-the-complete-course/learn/v4/content',
-    # 'Web Hosting 101: Get Your Website Live on the Web in No Time': 'https://citigroup.udemy.com/web-hosting-101/learn/v4/overview',
-    # 'Learn MongoDB 3.0 and Rapidly Develop Scalable Applications':  'https://citigroup.udemy.com/mongodb-tutorial/learn/v4/content',
-    # 'Real Estate Investing: Complete Investment Analysis': 'https://citigroup.udemy.com/real-estate-investment-analysis/learn/v4/content',
-    # 'Financial Modeling: Build a Complete DCF Valuation Model': 'https://citigroup.udemy.com/learn-how-to-value-a-company-and-build-a-dcf-model/learn/v4/content',
-    # 'Accounting 1 Simplified for You': 'https://citigroup.udemy.com/accounting-1-simplified-for-you/learn/v4/content',
-    # 'Accounting 2 Simplified for You': 'https://citigroup.udemy.com/accounting-2-simplified-for-you/learn/v4/content',
-    # 'Seeing the Big Picture: Understanding Financial Statements': 'https://citigroup.udemy.com/seeing-the-big-picture-financial-statements-made-easy/learn/v4/content',
-    # 'CFA Level I Review Course - 2015 curriculum': 'https://citigroup.udemy.com/cfa-level-i-review-course-2015-curriculum/learn/v4/content',
-    # 'CFA Level I Quantitative Methods Lectures': 'https://citigroup.udemy.com/cfa-level-i-quantitative-methods/learn/v4/content',
-    # 'CFA Level I Financial Reporting and Analysis Lectures': 'https://citigroup.udemy.com/cfa-level-i-fra-lectures/learn/v4/content',
-    # 'CFA Level I Foundation Course: Introduction to Quants': 'https://citigroup.udemy.com/cfa-foundation-quants/learn/v4/content',
-    # 'CFA Level I Workshop 6: Alternatives, PM and Economics': 'https://citigroup.udemy.com/cfa-workshop-6/learn/v4/content',
-    # 'Beginner to Pro in Excel: Financial Modeling and Valuation': 'https://citigroup.udemy.com/beginner-to-pro-in-excel-financial-modeling-and-valuation/learn/v4/content',
-    'The Complete Ruby on Rails Developer Course': 'https://citigroup.udemy.com/the-complete-ruby-on-rails-developer-course/learn/v4/content',
+    'Shell Scripting Linux': 'https://citigroup.udemy.com/shell-scripting-linux/learn/v4/content',
+    'Learning Python for Data Analysis and Visualization': 'https://citigroup.udemy.com/learning-python-for-data-analysis-and-visualization/learn/v4/content',
+    'Data Analysis in Python with Pandas': 'https://citigroup.udemy.com/data-analysis-in-python-with-pandas/learn/v4/content',
+    'Data Science: Deep Learning in Python': 'https://citigroup.udemy.com/data-science-deep-learning-in-python/learn/v4/content',
+    'Build Web Apps with React JS and Flux': 'https://citigroup.udemy.com/learn-and-understand-reactjs/learn/v4/content',
+    'Project Management Professional: Prep for PMP': 'https://citigroup.udemy.com/pmp-exam-prep-everything-you-must-know-to-pass-the-pmp-exam/learn/v4/content',
+    'Master Project Risk Management - 5 PDUs': 'https://citigroup.udemy.com/project-risk-management-5-pdus/learn/v4/content',
+    'Business Management - Organisational Culture Change Training': 'https://citigroup.udemy.com/business-create-organisational-culture-change/learn/v4/content',
+    'Statistics for Management (MBA) - Foundation of Analytics': 'https://citigroup.udemy.com/statistics-by-example/learn/v4/content',
+    'Learn and Understand AngularJS': 'https://citigroup.udemy.com/learn-angularjs/learn/v4/content',
+    'Meteor and React for Realtime Apps': 'https://citigroup.udemy.com/meteor-react-tutorial/learn/v4/content',
+    'AngularJS Crash Course for Beginners': 'https://citigroup.udemy.com/angularjs-crash-course-for-beginners/learn/v4/content',
+    'The Complete Guide to Angular 2': 'https://citigroup.udemy.com/the-complete-guide-to-angular-2/learn/v4/content',
+    'Learn Grunt with Examples: Automate Your Front End Workflow': 'https://citigroup.udemy.com/learn-grunt-automate-your-front-end-workflow/learn/v4/content',
+    'Introduction to Unit Testing': 'https://citigroup.udemy.com/refactoru-intro-unit-test/learn/v4/content',
+    'Advanced Node.js Development': 'https://citigroup.udemy.com/refactoru-adv-nodejs/learn/v4/content',
+    'Build Web Apps Using EmberJS: The Complete Course': 'https://citigroup.udemy.com/build-web-apps-using-emberjs-the-complete-course/learn/v4/content',
+    'Web Hosting 101: Get Your Website Live on the Web in No Time': 'https://citigroup.udemy.com/web-hosting-101/learn/v4/overview',
+    'Learn MongoDB 3.0 and Rapidly Develop Scalable Applications':  'https://citigroup.udemy.com/mongodb-tutorial/learn/v4/content',
+    'Real Estate Investing: Complete Investment Analysis': 'https://citigroup.udemy.com/real-estate-investment-analysis/learn/v4/content',
+    'Financial Modeling: Build a Complete DCF Valuation Model': 'https://citigroup.udemy.com/learn-how-to-value-a-company-and-build-a-dcf-model/learn/v4/content',
+    'Accounting 1 Simplified for You': 'https://citigroup.udemy.com/accounting-1-simplified-for-you/learn/v4/content',
+    'Accounting 2 Simplified for You': 'https://citigroup.udemy.com/accounting-2-simplified-for-you/learn/v4/content',
+    'Seeing the Big Picture: Understanding Financial Statements': 'https://citigroup.udemy.com/seeing-the-big-picture-financial-statements-made-easy/learn/v4/content',
+    'CFA Level I Review Course - 2015 curriculum': 'https://citigroup.udemy.com/cfa-level-i-review-course-2015-curriculum/learn/v4/content',
+    'CFA Level I Quantitative Methods Lectures': 'https://citigroup.udemy.com/cfa-level-i-quantitative-methods/learn/v4/content',
+    'CFA Level I Financial Reporting and Analysis Lectures': 'https://citigroup.udemy.com/cfa-level-i-fra-lectures/learn/v4/content',
+    'CFA Level I Foundation Course: Introduction to Quants': 'https://citigroup.udemy.com/cfa-foundation-quants/learn/v4/content',
+    'CFA Level I Workshop 6: Alternatives, PM and Economics': 'https://citigroup.udemy.com/cfa-workshop-6/learn/v4/content',
+    'Beginner to Pro in Excel: Financial Modeling and Valuation': 'https://citigroup.udemy.com/beginner-to-pro-in-excel-financial-modeling-and-valuation/learn/v4/content',
+    'The Complete Ruby on Rails Developer Course': 'https://citigroup.udemy.com/the-complete-ruby-on-rails-developer-course/learn/v4/content'
 }
 
 browser = webdriver.Chrome('C:/Python34/chromedriver.exe')
@@ -79,7 +79,7 @@ for course in courses:
         print('Storing names of videos of the course \'' + replace(course) + '\'...')
         url = courses[course]
         browser.get(url)
-        time.sleep(30)
+        time.sleep(20)
         tooltip_containers = browser.find_elements_by_class_name('tooltip-container')
         for tooltip_container in tooltip_containers:
             if tooltip_container.text == 'All Sections':
@@ -114,7 +114,7 @@ for course in courses:
             try:
                 if not os.path.exists(course_path + names[video_count]):
                     browser.get(url)
-                    time.sleep(30)
+                    time.sleep(20)
                     tooltip_containers = browser.find_elements_by_class_name('tooltip-container')
                     for tooltip_container in tooltip_containers:
                         if tooltip_container.text == 'All Sections':
@@ -144,7 +144,7 @@ for course in courses:
         num_files = len([f for f in os.listdir(course_path) if isfile(join(course_path, f))])
         if num_files == len(names) + 1:
             browser.get(url)
-            time.sleep(30)
+            time.sleep(20)
             print('Rearranging videos of the course \'' + course + '\' in correct folders...')
             tooltip_containers = browser.find_elements_by_class_name('tooltip-container')
             for tooltip_container in tooltip_containers:
