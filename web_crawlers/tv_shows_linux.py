@@ -9,6 +9,7 @@ from selenium.webdriver.support import expected_conditions as EC
 import requests
 import time
 import os
+import glob
 
 # List TV Shows
 tv_shows = {
@@ -26,7 +27,7 @@ tv_shows = {
 # Declare global variable browser
 global browser
 
-# Check for new episodes, download them and extract the RAR file. Move the video file to E: and delete the RAR file.
+# Check for new episodes, download them if not downloaded already, and extract the RAR file. Move the video file to E: and delete the RAR file.
 for show in tv_shows:
     print('Checking for ' + show + '...')
     url = tv_shows[show]
@@ -36,33 +37,38 @@ for show in tv_shows:
         soup = BeautifulSoup(plain_text, "html.parser")
         for dates in soup.findAll('span', {'class': 'meta_date'}):
             if datetime.strptime(dates.text, '%B %d, %Y').date() == datetime.today().date():
-                os.system('notify-send \"' + show + ' is here!\" --urgency=critical')
+            	os.system('notify-send \"' + show + ' is here!\" --urgency=critical')
                 print('\n' + show + ' is here!')
                 episode_url = dates.find_previous('a')['href']
                 episode_source_code = requests.get(episode_url)
                 episode_plain_text = episode_source_code.text
                 episode_soup = BeautifulSoup(episode_plain_text, "html.parser")
                 download_url = episode_soup.find('a', text='Mega')['href']
-                browser = webdriver.Chrome()
-                browser.get(download_url[download_url.index('https')::])
-                download_button = WebDriverWait(browser, 30).until(EC.presence_of_element_located((By.CLASS_NAME, 'throught-browser')))
-                download_button.click()
-                filename = browser.find_element_by_class_name('filename').get_attribute('title')
-                print('Downloading ' + filename + '...')
-                while 1:
-                    download_percent = browser.find_element_by_class_name('percents-txt').text
-                    print('\r' + download_percent + ' completed.', end='')
-                    if download_percent == '100 %':
-                        time.sleep(30)
-                        with RarFile('/home/mihir/Downloads/' + filename) as rf:
-                            for f in rf.infolist():
-                                if f.filename[::-1].split('.')[0] != 'txt':
-                                    with open('/media/mihir/Entertainment/' + f.filename, 'wb') as of:
-                                        of.write(rf.read(f))
-                                    break
-                        os.remove('/home/mihir/Downloads/' + filename)
-                        break
-                print()
+                try:
+                    browser.get(download_url[download_url.index('https')::])
+                except:
+                    browser = webdriver.Chrome()
+                    browser.get(download_url[download_url.index('https')::])
+                finally:
+                    filename = WebDriverWait(browser, 30).until(EC.presence_of_element_located((By.CLASS_NAME, 'filename'))).get_attribute('title')
+                    if not glob.glob('/media/mihir/Entertainment/' + filename.replace('.rar', '') + '*'):
+                        download_button = browser.find_element_by_class_name('throught-browser')
+                        download_button.click()
+                        print('Downloading ' + filename + '...')
+                        while 1:
+                            download_percent = browser.find_element_by_class_name('percents-txt').text
+                            print('\r' + download_percent + ' completed.', end='')
+                            if download_percent == '100 %':
+                                time.sleep(30)
+                                with RarFile('/home/mihir/Downloads/' + filename) as rf:
+                                    for f in rf.infolist():
+                                        if not f.filename.endswith('.txt'):
+                                            with open('/media/mihir/Entertainment/' + f.filename, 'wb') as of:
+                                                of.write(rf.read(f))
+                                            break
+                                os.remove('/home/mihir/Downloads/' + filename)
+                                break
+                        print()
     except Exception as e:
         print('\nError :' + str(e))
         pass
