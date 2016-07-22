@@ -20,6 +20,7 @@ tv_shows = {
     "Marvel's Daredevil": 'http://awesomedl.ru/?s=marvel%27s+daredevil&x=0&y=0',
     "Sherlock": 'http://awesomedl.ru/tag/sherlock/',
     "Suits": 'http://awesomedl.ru/tag/suits/',
+    "Silicon Valley": 'http://awesomedl.ru/?s=silicon+valley&x=0&y=0',
     "BBT": 'http://awesomedl.ru/tag/the-big-bang-theory/',
     "The Flash": 'http://awesomedl.ru/?s=the+flash&x=0&y=0'
 }
