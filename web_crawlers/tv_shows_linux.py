@@ -6,6 +6,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from urllib import request, error
 import requests
 import time
 import os
@@ -19,11 +20,24 @@ tv_shows = {
     "Marvel's Agents of S.H.I.E.L.D": 'http://awesomedl.ru/?s=marvel%27s+agents+of+s.h.i.e.l.d.&x=0&y=0',
     "Marvel's Daredevil": 'http://awesomedl.ru/?s=marvel%27s+daredevil&x=0&y=0',
     "Sherlock": 'http://awesomedl.ru/tag/sherlock/',
-    "Suits": 'http://awesomedl.ru/tag/suits/',
     "Silicon Valley": 'http://awesomedl.ru/?s=silicon+valley&x=0&y=0',
+    "The Night Manager": 'http://awesomedl.ru/?s=the+night+manager&x=0&y=0',
+    "Suits": 'http://awesomedl.ru/tag/suits/',
     "BBT": 'http://awesomedl.ru/tag/the-big-bang-theory/',
     "The Flash": 'http://awesomedl.ru/?s=the+flash&x=0&y=0'
 }
+
+def check_internet():
+    try:
+        request.urlopen('http://www.google.com', timeout=1)
+        return True
+    except error.URLError:
+        pass
+    return False
+
+while 1:
+    if check_internet():
+        break
 
 # Declare global variable browser
 global browser
