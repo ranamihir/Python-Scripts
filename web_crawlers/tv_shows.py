@@ -66,6 +66,19 @@ for show in tv_shows:
                 finally:
                     filename = WebDriverWait(browser, 30).until(EC.presence_of_element_located((By.CLASS_NAME, 'filename'))).get_attribute('title')
                     if not glob.glob('E:/' + filename.replace('.rar', '') + '*'):
+                        login_button = WebDriverWait(browser, 30).until(EC.presence_of_element_located((By.CLASS_NAME, 'top-login-button')))
+                        login_button.click()
+                        username = browser.find_element_by_id('login-name')
+                        username.send_keys('ranamihir@gmail.com')
+                        password = browser.find_element_by_id('login-password')
+                        password.send_keys('<password>')
+                        submit_button = browser.find_element_by_class_name('top-dialog-login-button').click()
+                        while 1:
+                            time.sleep(1)
+                            try:
+                                browser.find_element_by_class_name('not-logged')
+                            except:
+                                break
                         download_button = browser.find_element_by_class_name('throught-browser')
                         download_button.click()
                         print('Downloading ' + filename + '...')
@@ -83,8 +96,10 @@ for show in tv_shows:
                                 os.remove('C:/Users/ranamihir/Downloads/' + filename)
                                 break
                         print()
+                    else:
+                        print(show + ' already downloaded.')
     except Exception as e:
-        print('\nError :' + str(e))
+        print('\nError: ' + str(e))
         pass
 
 # Safely quit browser
