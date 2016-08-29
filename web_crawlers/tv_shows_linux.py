@@ -52,7 +52,7 @@ for show in tv_shows:
         soup = BeautifulSoup(plain_text, "html.parser")
         for dates in soup.findAll('span', {'class': 'meta_date'}):
             if datetime.strptime(dates.text, '%B %d, %Y').date() == datetime.today().date():
-            	os.system('notify-send \"' + show + ' is here!\" --urgency=critical')
+                os.system('notify-send \"' + show + ' is here!\" --urgency=critical')
                 print('\n' + show + ' is here!')
                 episode_url = dates.find_previous('a')['href']
                 episode_source_code = requests.get(episode_url)
@@ -67,7 +67,7 @@ for show in tv_shows:
                 finally:
                     filename = WebDriverWait(browser, 30).until(EC.presence_of_element_located((By.CLASS_NAME, 'filename'))).get_attribute('title')
                     if not glob.glob('/media/mihir/Entertainment/' + filename.replace('.rar', '') + '*'):
-                    	login_button = WebDriverWait(browser, 30).until(EC.presence_of_element_located((By.CLASS_NAME, 'top-login-button')))
+                        login_button = WebDriverWait(browser, 30).until(EC.presence_of_element_located((By.CLASS_NAME, 'top-login-button')))
                         login_button.click()
                         username = browser.find_element_by_id('login-name')
                         username.send_keys('ranamihir@gmail.com')
