@@ -59,10 +59,10 @@ for show in tv_shows:
                 episode_soup = BeautifulSoup(episode_plain_text, "html5lib")
                 download_url = episode_soup.find('a', text='Mega')['href']
                 try:
-                    browser.get(download_url[download_url.index('https')::])
+                    browser.get('http://' + download_url[download_url.index('goo.gl')::])
                 except:
                     browser = webdriver.Chrome('C:/Python34/chromedriver.exe')
-                    browser.get(download_url[download_url.index('https')::])
+                    browser.get('http://' + download_url[download_url.index('goo.gl')::])
                 finally:
                     filename = WebDriverWait(browser, 30).until(EC.presence_of_element_located((By.CLASS_NAME, 'filename'))).get_attribute('title')
                     if not glob.glob('E:/' + filename.replace('.rar', '') + '*'):
