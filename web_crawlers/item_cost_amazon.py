@@ -16,7 +16,7 @@ except:
     price = soup.find('span', {'id': 'priceblock_saleprice'}).text.strip(' ').replace(',', '').replace(u'\xa0', '').strip(' ')
 print('Price of ' + name + ' is: Rs.' + price)
 
-if int(price[:price.index('.')]) <= threshold_value:
+if int(price) <= threshold_value:
         # Send mail
         sender_address = 'abc@gmail.com'
         receiver_address = 'xyz@gmail.com'
