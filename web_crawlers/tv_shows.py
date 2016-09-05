@@ -69,7 +69,7 @@ for show in tv_shows:
                         login_button = WebDriverWait(browser, 30).until(EC.presence_of_element_located((By.CLASS_NAME, 'top-login-button')))
                         login_button.click()
                         username = browser.find_element_by_id('login-name')
-                        username.send_keys('ranamihir@gmail.com')
+                        username.send_keys('<username>')
                         password = browser.find_element_by_id('login-password')
                         password.send_keys('<password>')
                         submit_button = browser.find_element_by_class_name('top-dialog-login-button').click()
@@ -79,7 +79,7 @@ for show in tv_shows:
                                 browser.find_element_by_class_name('not-logged')
                             except:
                                 break
-                        download_button = browser.find_element_by_class_name('throught-browser')
+                        download_button = WebDriverWait(browser, 30).until(EC.visibility_of_element_located((By.CLASS_NAME, 'throught-browser')))
                         download_button.click()
                         print('Downloading ' + filename + '...')
                         while 1:

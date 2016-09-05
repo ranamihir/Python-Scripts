@@ -60,17 +60,17 @@ for show in tv_shows:
                 episode_soup = BeautifulSoup(episode_plain_text, "html.parser")
                 download_url = episode_soup.find('a', text='Mega')['href']
                 try:
-                    browser.get(download_url[download_url.index('https')::])
+                    browser.get('http://' + download_url[download_url.index('goo.gl')::])
                 except:
                     browser = webdriver.Chrome()
-                    browser.get(download_url[download_url.index('https')::])
+                    browser.get('http://' + download_url[download_url.index('goo.gl')::])
                 finally:
                     filename = WebDriverWait(browser, 30).until(EC.presence_of_element_located((By.CLASS_NAME, 'filename'))).get_attribute('title')
                     if not glob.glob('/media/mihir/Entertainment/' + filename.replace('.rar', '') + '*'):
                         login_button = WebDriverWait(browser, 30).until(EC.presence_of_element_located((By.CLASS_NAME, 'top-login-button')))
                         login_button.click()
                         username = browser.find_element_by_id('login-name')
-                        username.send_keys('ranamihir@gmail.com')
+                        username.send_keys('<username>')
                         password = browser.find_element_by_id('login-password')
                         password.send_keys('<password>')
                         submit_button = browser.find_element_by_class_name('top-dialog-login-button').click()
@@ -80,7 +80,7 @@ for show in tv_shows:
                                 browser.find_element_by_class_name('not-logged')
                             except:
                                 break
-                        download_button = browser.find_element_by_class_name('throught-browser')
+                        download_button = WebDriverWait(browser, 30).until(EC.visibility_of_element_located((By.CLASS_NAME, 'throught-browser')))
                         download_button.click()
                         print('Downloading ' + filename + '...')
                         while 1:
