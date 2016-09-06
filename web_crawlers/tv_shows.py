@@ -42,7 +42,7 @@ while 1:
 # Declare global variable browser
 global browser
 
-# Check for new episodes, download them if not downloaded already, and extract the RAR file. Move the video file to F: and delete the RAR file.
+# Check for new episodes, download them if not downloaded already, and extract the RAR file. Move the video file to D: and delete the RAR file.
 for show in tv_shows:
     print('Checking for ' + show + '...')
     url = tv_shows[show]
@@ -90,7 +90,7 @@ for show in tv_shows:
                                 with RarFile('C:/Users/ranamihir/Downloads/' + filename) as rf:
                                     for f in rf.infolist():
                                         if not f.filename.endswith('.txt'):
-                                            with open('F:/' + f.filename, 'wb') as of:
+                                            with open('D:/' + f.filename, 'wb') as of:
                                                 of.write(rf.read(f))
                                             break
                                 os.remove('C:/Users/ranamihir/Downloads/' + filename)
