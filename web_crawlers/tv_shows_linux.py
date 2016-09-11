@@ -42,7 +42,7 @@ while 1:
 # Declare global variable browser
 global browser
 
-# Check for new episodes, download them if not downloaded already, and extract the RAR file. Move the video file to E: and delete the RAR file.
+# Check for new episodes, download them if not downloaded already, and extract the RAR file. Move the video file to D: and delete the RAR file.
 for show in tv_shows:
     print('Checking for ' + show + '...')
     url = tv_shows[show]
@@ -52,7 +52,7 @@ for show in tv_shows:
         soup = BeautifulSoup(plain_text, "html.parser")
         for dates in soup.findAll('span', {'class': 'meta_date'}):
             if datetime.strptime(dates.text, '%B %d, %Y').date() == datetime.today().date():
-                os.system('notify-send \"' + show + ' is here!\" --urgency=critical')
+                os.system('notify-send \"' + show + ' is here!\"')
                 print('\n' + show + ' is here!')
                 episode_url = dates.find_previous('a')['href']
                 episode_source_code = requests.get(episode_url)
