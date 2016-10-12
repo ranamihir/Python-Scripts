@@ -52,7 +52,6 @@ for show in tv_shows:
         soup = BeautifulSoup(plain_text, "html5lib")
         for dates in soup.findAll('span', {'class': 'meta_date'}):
             if datetime.strptime(dates.text, '%B %d, %Y').date() == datetime.today().date():
-                print('\n' + show + ' is here!')
                 episode_url = dates.find_previous('a')['href']
                 episode_source_code = requests.get(episode_url)
                 episode_plain_text = episode_source_code.text
@@ -66,6 +65,7 @@ for show in tv_shows:
                 finally:
                     filename = WebDriverWait(browser, 30).until(EC.presence_of_element_located((By.CLASS_NAME, 'filename'))).get_attribute('title')
                     if not glob.glob('F:/' + filename.replace('.rar', '') + '*'):
+                        print('\n' + show + ' is here!')
                         login_button = WebDriverWait(browser, 30).until(EC.presence_of_element_located((By.CLASS_NAME, 'top-login-button')))
                         login_button.click()
                         username = browser.find_element_by_id('login-name')
@@ -94,16 +94,13 @@ for show in tv_shows:
                                                 of.write(rf.read(f))
                                             break
                                 os.remove('C:/Users/ranamihir/Downloads/' + filename)
+                                print(show + ' has been downloaded and saved in D:.')
                                 break
                         print()
                     else:
-                        print(show + ' already downloaded.')
+                        print(show + ' has already been downloaded.')
+                    # Safely quit browser
+                    browser.quit()
     except Exception as e:
         print('\nError: ' + str(e))
         pass
-
-# Safely quit browser
-try:
-    browser.quit()
-except:
-    pass
