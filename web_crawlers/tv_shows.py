@@ -64,7 +64,7 @@ for show in tv_shows:
                     browser.get('http://' + download_url[download_url.index('goo.gl')::])
                 finally:
                     filename = WebDriverWait(browser, 30).until(EC.presence_of_element_located((By.CLASS_NAME, 'filename'))).get_attribute('title')
-                    if not glob.glob('F:/' + filename.replace('.rar', '') + '*'):
+                    if not glob.glob('D:/' + filename.replace('.rar', '') + '*'):
                         print('\n' + show + ' is here!')
                         login_button = WebDriverWait(browser, 30).until(EC.presence_of_element_located((By.CLASS_NAME, 'top-login-button')))
                         login_button.click()
