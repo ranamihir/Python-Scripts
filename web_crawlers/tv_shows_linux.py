@@ -16,15 +16,15 @@ import glob
 tv_shows = {
     "Arrow": 'http://awesomedl.ru/tag/arrow/',
     "Elementary": 'http://awesomedl.ru/tag/elementary/',
-    "House of Cards": 'http://awesomedl.ru/?s=house+of+cards&x=0&y=0',
-    "Marvel's Agents of S.H.I.E.L.D": 'http://awesomedl.ru/?s=marvel%27s+agents+of+s.h.i.e.l.d.&x=0&y=0',
-    "Marvel's Daredevil": 'http://awesomedl.ru/?s=marvel%27s+daredevil&x=0&y=0',
+    "House of Cards": 'http://awesomedl.ru/tag/house-of-cards-2013/',
+    "Marvel's Agents of S.H.I.E.L.D": 'http://awesomedl.ru/tag/marvels-agents-of-s-h-i-e-l-d/',
+    "Marvel's Daredevil": 'http://awesomedl.ru/tag/marvels-daredevil/',
     "Sherlock": 'http://awesomedl.ru/tag/sherlock/',
-    "Silicon Valley": 'http://awesomedl.ru/?s=silicon+valley&x=0&y=0',
+    "Silicon Valley": 'http://awesomedl.ru/tag/silicon-valley/',
     "The Night Manager": 'http://awesomedl.ru/?s=the+night+manager&x=0&y=0',
     "Suits": 'http://awesomedl.ru/tag/suits/',
     "BBT": 'http://awesomedl.ru/tag/the-big-bang-theory/',
-    "The Flash": 'http://awesomedl.ru/?s=the+flash&x=0&y=0'
+    "The Flash": 'http://awesomedl.ru/tag/the-flash-2014/'
 }
 
 def check_internet():
