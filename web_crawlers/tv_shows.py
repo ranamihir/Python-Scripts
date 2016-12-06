@@ -60,7 +60,7 @@ for show in tv_shows:
                 try:
                     browser.get('http://' + download_url[download_url.index('goo.gl')::])
                 except:
-                    browser = webdriver.Chrome('C:/Python34/chromedriver.exe')
+                    browser = webdriver.Chrome('C:/Users/ranamihir/AppData/Local/Programs/Python/Python35-32/chromedriver.exe')
                     browser.get('http://' + download_url[download_url.index('goo.gl')::])
                 finally:
                     filename = WebDriverWait(browser, 30).until(EC.presence_of_element_located((By.CLASS_NAME, 'filename'))).get_attribute('title')

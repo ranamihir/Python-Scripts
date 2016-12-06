@@ -58,13 +58,13 @@ courses = {
     'The Complete Ruby on Rails Developer Course': 'https://citigroup.udemy.com/the-complete-ruby-on-rails-developer-course/learn/v4/content'
 }
 
-browser = webdriver.Chrome('C:/Python34/chromedriver.exe')
+browser = webdriver.Chrome('C:/Users/ranamihir/AppData/Local/Programs/Python/Python35-32/chromedriver.exe')
 url = 'https://citigroup.udemy.com/'
 browser.get(url)
 username = browser.find_element_by_name('USER')
-username.send_keys('<username>')
+username.send_keys('as48677')
 password = browser.find_element_by_name('PASSWORD')
-password.send_keys('<password>')
+password.send_keys('c03u5thermo')
 submit = browser.find_element_by_class_name('ButtonSm')
 submit.click()
 
